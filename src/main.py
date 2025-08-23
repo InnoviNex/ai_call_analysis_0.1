@@ -2,20 +2,20 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from utils.licencia_online import validar_licencia_online, registrar_uso_en_hoja
+from utils.licencia_online import (
+    obtener_cliente_id,
+    validar_licencia_online,
+    registrar_uso_en_hoja,
+)
 from utils.transcriber import transcribir_audio
 from utils.analyzer import analizar_transcripcion
 from utils.reporter import guardar_reporte
 
-def leer_cliente_id():
-    with open("data/licencia/cliente_id.txt", "r") as f:
-        return f.read().strip()
-
 RUTA_AUDIO = "data/llamadas/llamada_cliente.mp3"
 
 def main():
-    cliente_id = leer_cliente_id()
-    valido, mensaje = validar_licencia_online()
+    cliente_id = obtener_cliente_id()
+    valido, mensaje = validar_licencia_online(cliente_id)
     if not valido:
         print(f"❌ {mensaje}")
         registrar_uso_en_hoja(cliente_id, mensaje, RUTA_AUDIO)

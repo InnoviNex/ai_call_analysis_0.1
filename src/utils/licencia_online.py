@@ -1,19 +1,26 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
-from config.settings import CREDENCIALES_GOOGLE, SPREADSHEET_ID, NOMBRE_HOJA_LICENCIAS, NOMBRE_HOJA_REGISTRO
+from config.settings import (
+    CREDENCIALES_GOOGLE,
+    SPREADSHEET_ID,
+    NOMBRE_HOJA_LICENCIAS,
+    NOMBRE_HOJA_REGISTRO,
+)
 
 
-def validar_licencia_online():
+def obtener_cliente_id():
+    """Lee el identificador del cliente desde el archivo de licencia."""
+    with open("data/licencia/cliente_id.txt", "r", encoding="utf-8") as f:
+        return f.read().strip()
+
+
+def validar_licencia_online(cliente_id: str):
     try:
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
         creds = ServiceAccountCredentials.from_json_keyfile_name(CREDENCIALES_GOOGLE, scope)
         client = gspread.authorize(creds)
         sheet = client.open_by_key(SPREADSHEET_ID).worksheet(NOMBRE_HOJA_LICENCIAS)
-
-
-        with open("data/licencia/cliente_id.txt", "r") as f:
-            cliente_id = f.read().strip()
 
         registros = sheet.get_all_records(expected_headers=["cliente_id", "estado", "vencimiento"])
 
@@ -29,6 +36,7 @@ def validar_licencia_online():
         return False, "Cliente no registrado"
     except Exception as e:
         return False, f"Error al validar licencia: {e}"
+
 
 def registrar_uso_en_hoja(cliente_id, estado_licencia, archivo_audio):
     try:

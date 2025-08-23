@@ -57,6 +57,8 @@ pip install -r requirements.txt
 
 ## 🌟 Uso
 
+### CLI
+
 1. Ejecutar la aplicación principal:
 
 ```bash
@@ -64,6 +66,19 @@ python src/main.py
 ```
 
 2. Seguir las instrucciones en pantalla para cargar archivos de audio y analizar llamadas.
+
+### Servidor web
+
+1. Levantar el servidor:
+
+```bash
+uvicorn web.app:app --reload
+```
+
+2. Endpoints disponibles:
+
+- `POST /analizar`: enviar un archivo de audio en el campo `audio` y recibir la transcripción y el análisis.
+- `GET /reportes/{nombre}`: descargar un reporte generado en `data/reportes`.
 
 ---
 
