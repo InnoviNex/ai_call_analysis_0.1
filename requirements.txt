@@ -1,16 +1,8 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/requirements.txt b/requirements.txt
-index 0fe0deab480f8c167479cebfd7dd0e74a53bca2c..7ae3ebaae48e7a52fddbfe22874313352f55e3b3 100644
---- a/requirements.txt
-+++ b/requirements.txt
-@@ -1,4 +1,6 @@
- openai
- gspread
- oauth2client
--python-dotenv
-+python-dotenv
-+fastapi
-+uvicorn
- 
-EOF
-)
+openai
+gspread
+oauth2client
+python-dotenv
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
