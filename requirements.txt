@@ -3,4 +3,6 @@ gspread
 oauth2client
 python-dotenv
 fastapi
-uvicorn
+uvicorn[standard]
+python-multipart
+pydantic
