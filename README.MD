@@ -1,4 +1,4 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/README.MD b/README.MD
 index 045a1799fa34416040970714f0045de5af86755f..3612030c356943875fa012bdbef834ee6859209e 100644
 --- a/README.MD
@@ -10,14 +10,16 @@ index 045a1799fa34416040970714f0045de5af86755f..3612030c356943875fa012bdbef834ee
  3. Activar el entorno virtual:
  
  - En Windows:
+CMD
+venv\Scripts\activate.bat
  
- ```bash
- .\venv\Scripts\activate
+ PowerShell 
+ .\venv\Scripts\Activate.ps1
  ```
  
  - En Linux/Mac:
  
- ```bash
+ gitbash
  source venv/bin/activate
  ```
  
@@ -94,3 +96,4 @@ index 045a1799fa34416040970714f0045de5af86755f..3612030c356943875fa012bdbef834ee
  
 EOF
 )
+
